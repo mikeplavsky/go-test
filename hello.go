@@ -7,12 +7,31 @@ const (
   Blue, ColorMask = (1<<iota), (1<<(iota+1))-1
 )
 
+type distance int
+
+type Example struct {
+  Val string
+  count int
+}
+
+func (e *Example) log() {
+  e.count++
+  printf( "%d %s\n", e.count, e.Val)
+}
+
 func printf(str string, args ...interface{})(int, error) {
   _,err := fmt.Printf(str, args...)
   return len(args), err
 }
 
 func main() {
+
+  one := new(Example)
+  one.count = 10
+  one.Val = "Wow!"
+
+  one.log()
+
   count := 1
   closure := func(msg string) {
     printf("%d %s\n", count, msg)
