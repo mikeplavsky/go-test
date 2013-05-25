@@ -14,4 +14,20 @@ func main() {
   }
   closure("A Message")
   closure("Another Message")
+
+  loops := 1
+  for loops > 0 {
+
+    printf( "\nNumber of loops?\n" )
+    fmt.Scanf("%d",&loops)
+
+    for i := 0; i < loops; i++ {
+      printf("%d", i)
+    }
+  }
+
+  for {
+    break
+  }
+
 }
