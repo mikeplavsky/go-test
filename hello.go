@@ -30,4 +30,14 @@ func main() {
     break
   }
 
+  for i := 0; i < 10; i++ {
+    L:
+    for {
+      for {
+        break L
+      }
+    }
+    printf( "%d\n", i)
+  }
+
 }
