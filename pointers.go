@@ -4,8 +4,8 @@ import "unsafe"
 
 func main() {
 
-  str := "A Go variable"
-  addr := unsafe.Pointer(&str)
+  str   := "A Go variable"
+  addr  := unsafe.Pointer(&str)
   addr1 := &str
 
   fmt.Printf("The address of str is 0x%x\n", addr)
@@ -23,4 +23,5 @@ func main() {
   fmt.Printf("The address of stri3 is 0x%x\n", address)
 
   fmt.Printf( "String constructed  from pointer: %s\n", *str3)
+
 }
