@@ -1,9 +1,5 @@
 package fib
-
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
 func fib(n int) int {
 
@@ -36,17 +32,23 @@ func fib1(n int) int {
 	return res
 }
 
-func main() {
+func calc(c chan int) {
+  c <- fib(37)
+}
 
-	fmt.Printf("Starting...\n")
+func p_fib(n int) {
 
-	start := time.Now()
+	c := make(chan int)
 
-	for i := 0; i < 10; i++ {
-		fmt.Printf("Result: %v\n", fib(37))
-	}
+        for i := 0; i < n; i++ {
+          go calc(c)
+        }
 
-	elapsed := time.Since(start)
-	fmt.Printf("Elapsed %s\n", elapsed)
+        res := 0
 
+        for i := 0; i < n; i++ {
+          res = <-c
+        }
+
+        fmt.Println("Done!\n", res)
 }
