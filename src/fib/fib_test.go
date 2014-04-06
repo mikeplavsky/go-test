@@ -36,5 +36,9 @@ func TestMain(t *testing.T) {
 }
 
 func TestPfib(t *testing.T) {
-	p_fib(10)
+	p_fib(10, fib)
+}
+
+func TestPfib1(t *testing.T) {
+	p_fib(10, fib1)
 }

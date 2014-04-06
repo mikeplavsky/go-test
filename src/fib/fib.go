@@ -1,4 +1,5 @@
 package fib
+
 import "fmt"
 
 func fib(n int) int {
@@ -32,23 +33,21 @@ func fib1(n int) int {
 	return res
 }
 
-func calc(c chan int) {
-  c <- fib(37)
-}
-
-func p_fib(n int) {
+func p_fib(n int, f func(int) int) {
 
 	c := make(chan int)
 
-        for i := 0; i < n; i++ {
-          go calc(c)
-        }
+	for i := 0; i < n; i++ {
+		go func() {
+			c <- f(37)
+		}()
+	}
 
-        res := 0
+	var res []int
 
-        for i := 0; i < n; i++ {
-          res = <-c
-        }
+	for i := 0; i < n; i++ {
+		res = append(res,<-c)
+	}
 
-        fmt.Println("Done!\n", res)
+	fmt.Println("Done!\n", res)
 }
