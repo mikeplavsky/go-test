@@ -39,7 +39,9 @@ func p_fib(n int, f func(int) int) {
 
 	for i := 0; i < n; i++ {
 		go func() {
-			out <- f(<-in)
+			for i := range in {
+				out <- f(i)
+			}
 		}()
 	}
 
@@ -49,7 +51,7 @@ func p_fib(n int, f func(int) int) {
 
 	var res []int
 
-        for i := 0; i < n; i++ {
+	for i := 0; i < n; i++ {
 		res = append(res, <-out)
 	}
 
