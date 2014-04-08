@@ -35,18 +35,22 @@ func fib1(n int) int {
 
 func p_fib(n int, f func(int) int) {
 
-	c := make(chan int)
+	in, out := make(chan int), make(chan int)
 
 	for i := 0; i < n; i++ {
 		go func() {
-			c <- f(37)
+			out <- f(<-in)
 		}()
+	}
+
+	for i := 0; i < n; i++ {
+		in <- 37
 	}
 
 	var res []int
 
-	for i := 0; i < n; i++ {
-		res = append(res,<-c)
+        for i := 0; i < n; i++ {
+		res = append(res, <-out)
 	}
 
 	fmt.Println("Done!\n", res)
