@@ -33,11 +33,11 @@ func fib1(n int) int {
 	return res
 }
 
-func p_fib(n int, f func(int) int) {
+func p_fib(tasks []int, workers int, f func(int) int) {
 
 	in, out := make(chan int), make(chan int)
 
-	for i := 0; i < n; i++ {
+	for i := 0; i < workers; i++ {
 		go func() {
 			for i := range in {
 				out <- f(i)
@@ -45,13 +45,13 @@ func p_fib(n int, f func(int) int) {
 		}()
 	}
 
-	for i := 0; i < n; i++ {
-		in <- 37
+	for _, v := range tasks {
+		in <- v
 	}
 
 	var res []int
 
-	for i := 0; i < n; i++ {
+	for i := 0; i < len(tasks); i++ {
 		res = append(res, <-out)
 	}
 

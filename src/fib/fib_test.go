@@ -35,10 +35,24 @@ func TestMain(t *testing.T) {
 
 }
 
+var tasks []int
+
+func init_tasks(v int, n int) {
+
+	tasks = tasks[0:0]
+
+	for i := 0; i < n; i++ {
+		tasks = append(tasks, v)
+	}
+
+}
+
 func TestPfib(t *testing.T) {
-	p_fib(10, fib)
+	init_tasks(37, 11)
+	p_fib(tasks, 10, fib)
 }
 
 func TestPfib1(t *testing.T) {
-	p_fib(10, fib1)
+	init_tasks(37, 10)
+	p_fib(tasks, 10, fib1)
 }
