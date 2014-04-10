@@ -49,10 +49,10 @@ func init_tasks(v int, n int) {
 
 func TestPfib(t *testing.T) {
 	init_tasks(37, 14)
-	p_fib(tasks, 10, fib)
+	runner(tasks, 10, fib)
 }
 
 func TestPfib1(t *testing.T) {
 	init_tasks(100, 15)
-	p_fib(tasks, 10, fib1)
+	runner(tasks, 10, fib1)
 }

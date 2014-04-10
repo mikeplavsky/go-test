@@ -33,7 +33,7 @@ func fib1(n int) int {
 	return res
 }
 
-func p_fib(tasks []int, workers int, f func(int) int) {
+func runner(tasks []int, workers int, f func(int) int) {
 
 	in, out := make(chan int), make(chan int)
 
