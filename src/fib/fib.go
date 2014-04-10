@@ -39,8 +39,8 @@ func p_fib(tasks []int, workers int, f func(int) int) {
 
 	for i := 0; i < workers; i++ {
 		go func() {
-			for i := range in {
-				out <- f(i)
+			for {
+				out <- f(<-in)
 			}
 		}()
 	}
