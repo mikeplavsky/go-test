@@ -45,15 +45,25 @@ func p_fib(tasks []int, workers int, f func(int) int) {
 		}()
 	}
 
+	done := make(chan bool)
+
+	go func() {
+
+		var res []int
+
+		for i := 0; i < len(tasks); i++ {
+			res = append(res, <-out)
+		}
+
+		fmt.Println("Done!\n", res)
+
+		done <- true
+	}()
+
 	for _, v := range tasks {
 		in <- v
 	}
 
-	var res []int
+	<-done
 
-	for i := 0; i < len(tasks); i++ {
-		res = append(res, <-out)
-	}
-
-	fmt.Println("Done!\n", res)
 }
