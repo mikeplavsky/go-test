@@ -7,8 +7,8 @@ import (
 
 func TestFib1(t *testing.T) {
 
-	f := fib(37)
-	f1 := fib1(37)
+	f := FibR(37)
+	f1 := Fib(37)
 
 	if f != f1 {
 		t.Error("Fib1 is not equal to Fib", f1, f)
@@ -17,20 +17,20 @@ func TestFib1(t *testing.T) {
 
 func BenchmarkFib1(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		fib1(37)
+		Fib(37)
 	}
 }
 
 func BenchmarkFib(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		fib(37)
+		FibR(37)
 	}
 }
 
 func TestMain(t *testing.T) {
 
 	for i := 0; i < 10; i++ {
-		fmt.Printf("Result: %v\n", fib(37))
+		fmt.Printf("Result: %v\n", FibR(37))
 	}
 
 }
@@ -47,12 +47,12 @@ func init_tasks(v int, n int) {
 
 }
 
-func TestPfib(t *testing.T) {
+func TestPFibR(t *testing.T) {
 	init_tasks(37, 11)
-	runner(tasks, 10, fib)
+	Runner(tasks, 10, FibR)
 }
 
-func TestPfib1(t *testing.T) {
+func TestPFib(t *testing.T) {
 	init_tasks(37, 10)
-	runner(tasks, 10, fib1)
+	Runner(tasks, 10, Fib)
 }

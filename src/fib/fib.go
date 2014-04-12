@@ -1,8 +1,10 @@
+//fib package allows to calculate nth fibonacci number.
 package fib
 
 import "fmt"
 
-func fib(n int) int {
+//it is recursive, that's why it is  very slow
+func FibR(n int) int {
 
 	if n == 0 {
 		return 1
@@ -11,10 +13,11 @@ func fib(n int) int {
 		return 1
 	}
 
-	return fib(n-1) + fib(n-2)
+	return FibR(n-1) + FibR(n-2)
 }
 
-func fib1(n int) int {
+//it is fast: based on for
+func Fib(n int) int {
 
 	res := 0
 
@@ -33,7 +36,8 @@ func fib1(n int) int {
 	return res
 }
 
-func runner(tasks []int, workers int, f func(int) int) {
+//tasks are being done by given number of workers
+func Runner(tasks []int, workers int, f func(int) int) {
 
 	in, out := make(chan int), make(chan int)
 
