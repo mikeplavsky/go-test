@@ -1,8 +1,6 @@
 //fib package allows to calculate nth fibonacci number.
 package fib
 
-import "fmt"
-
 //it is recursive, that's why it is  very slow
 func FibR(n int) int {
 
@@ -44,9 +42,10 @@ func Fib(n int) int {
 }
 
 //tasks are being done by given number of workers
-func Runner(tasks []int, workers int, f func(int) int) {
+//channels are mailboxes here - async
+func Runner(tasks []int, workers int, f func(int) int) []int {
 
-	in, out := make(chan int), make(chan int)
+	in, out := make(chan int, 10), make(chan int, 10)
 
 	for i := 0; i < workers; i++ {
 		go func() {
@@ -66,5 +65,6 @@ func Runner(tasks []int, workers int, f func(int) int) {
 		res = append(res, <-out)
 	}
 
-	fmt.Println("Done!\n", res)
+	return res
+
 }

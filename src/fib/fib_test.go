@@ -27,7 +27,7 @@ func ExampleFibR() {
 		FibR(3),
 		FibR(4),
 		FibR(5))
-	// Output: 0 1 1 2 3 5 
+	// Output: 0 1 1 2 3 5
 
 }
 
@@ -41,44 +41,42 @@ func TestFib1(t *testing.T) {
 	}
 }
 
-func BenchmarkFib1(b *testing.B) {
+func BenchmarkFib(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Fib(37)
 	}
 }
 
-func BenchmarkFib(b *testing.B) {
+func BenchmarkFibR(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		FibR(37)
 	}
 }
 
-func TestMain(t *testing.T) {
+func test_perf(t *testing.T, f func(int) int, nth int, times int) {
 
-	for i := 0; i < 10; i++ {
-		fmt.Printf("Result: %v\n", FibR(37))
+	tasks := make([]int, 0)
+
+	for i := 0; i < times; i++ {
+		tasks = append(tasks, nth)
 	}
 
-}
+	res := Runner(tasks, 10, f)
 
-var tasks []int
+	if len(res) != times {
+		t.Error("wrong slice length")
+	}
 
-func init_tasks(v int, n int) {
-
-	tasks = tasks[0:0]
-
-	for i := 0; i < n; i++ {
-		tasks = append(tasks, v)
+	if res[0] != f(nth) {
+		t.Error("wrong fibonacci number")
 	}
 
 }
 
 func TestPFibR(t *testing.T) {
-	init_tasks(37, 11)
-	Runner(tasks, 10, FibR)
+	test_perf(t, FibR, 38, 11)
 }
 
 func TestPFib(t *testing.T) {
-	init_tasks(37, 10)
-	Runner(tasks, 10, Fib)
+	test_perf(t, Fib, 38, 11)
 }
