@@ -7,7 +7,7 @@ import "fmt"
 func FibR(n int) int {
 
 	if n == 0 {
-		return 1
+		return 0
 	}
 	if n == 1 {
 		return 1
@@ -24,7 +24,14 @@ func Fib(n int) int {
 	a := 0
 	b := 1
 
-	for i := 0; i < n; i++ {
+	if n == 0 {
+		return a
+	}
+	if n == 1 {
+		return b
+	}
+
+	for i := 2; i <= n; i++ {
 
 		res = a + b
 

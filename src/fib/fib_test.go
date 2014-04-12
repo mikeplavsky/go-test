@@ -5,6 +5,32 @@ import (
 	"testing"
 )
 
+func ExampleFib() {
+
+	fmt.Println(
+		Fib(0),
+		Fib(1),
+		Fib(2),
+		Fib(3),
+		Fib(4),
+		Fib(5))
+	// Output: 0 1 1 2 3 5
+
+}
+
+func ExampleFibR() {
+
+	fmt.Println(
+		FibR(0),
+		FibR(1),
+		FibR(2),
+		FibR(3),
+		FibR(4),
+		FibR(5))
+	// Output: 0 1 1 2 3 5 
+
+}
+
 func TestFib1(t *testing.T) {
 
 	f := FibR(37)
